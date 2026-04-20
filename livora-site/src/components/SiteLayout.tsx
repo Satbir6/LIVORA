@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { navItems } from '../data/siteContent'
 import logoIcon from '../../LOGO/icon.svg'
 import logofooter from '../../LOGO/Frame 6.png'
@@ -12,6 +12,7 @@ type Props = {
 export function SiteLayout({ children }: Props) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24)
@@ -43,7 +44,7 @@ export function SiteLayout({ children }: Props) {
                 key={item.path}
                 to={item.path}
                 className={({ isActive }) =>
-                  `rounded-full px-4 py-2 font-subheading text-[0.72rem] uppercase tracking-[0.14em] transition-all ${
+                  `rounded-full px-4 py-2 font-subheading text-[0.72rem] uppercase tracking-[0.14em] transition-all duration-300 ease-out ${
                     isActive
                       ? 'bg-livora-blue text-white shadow-soft'
                       : 'text-livora-blue hover:bg-livora-sand hover:text-livora-ink'
@@ -78,7 +79,7 @@ export function SiteLayout({ children }: Props) {
                   to={item.path}
                   onClick={() => setMenuOpen(false)}
                   className={({ isActive }) =>
-                    `rounded-xl px-4 py-3 font-subheading text-[0.72rem] uppercase tracking-[0.14em] ${
+                      `rounded-xl px-4 py-3 font-subheading text-[0.72rem] uppercase tracking-[0.14em] transition-all duration-300 ease-out ${
                       isActive ? 'bg-livora-blue text-white' : 'bg-livora-light text-livora-blue'
                     }`
                   }
@@ -98,7 +99,11 @@ export function SiteLayout({ children }: Props) {
         ) : null}
       </header>
 
-      <main className="relative z-10 pt-24">{children}</main>
+      <main className="relative z-10 pt-24">
+        <div key={location.pathname} className="animate-reveal motion-reduce:animate-none">
+          {children}
+        </div>
+      </main>
 
       <footer className="relative mt-10 overflow-hidden border-t border-livora-blue/20 bg-livora-ink text-white">
         <div className="pointer-events-none absolute -right-20 top-6 h-72 w-72 rounded-full bg-livora-gold/20 blur-3xl" />

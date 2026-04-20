@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
-import { SiteLayout } from '../components/SiteLayout'
 import { Button } from '../components/ui/Button'
 import { serviceGalleryStockImages, serviceStockImages, services, stats, testimonials, whyChooseUs } from '../data/siteContent'
 
 export function HomePage() {
   return (
-    <SiteLayout>
+    <>
       <section className="relative min-h-[90vh] overflow-hidden px-5 py-16 sm:px-8">
         <div
           className="absolute inset-0 scale-105 bg-cover bg-center"
@@ -132,6 +131,6 @@ export function HomePage() {
           </div>
         </div>
       </section>
-    </SiteLayout>
+    </>
   )
 }

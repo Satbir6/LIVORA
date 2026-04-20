@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { SiteLayout } from '../components/SiteLayout'
 import { Button } from '../components/ui/Button'
 import { faqs, processSteps, trustHighlights } from '../data/siteContent'
 
@@ -53,7 +52,7 @@ export function ContactPage() {
   }
 
   return (
-    <SiteLayout>
+    <>
       <section className="relative overflow-hidden px-5 pb-14 pt-12 sm:px-8 sm:pt-16">
         <div className="absolute inset-0">
           <img src={inquireHeroImage} alt="Inquire hero visual" className="h-full w-full object-cover" />
@@ -236,6 +235,6 @@ export function ContactPage() {
           </div>
         </div>
       </section>
-    </SiteLayout>
+    </>
   )
 }

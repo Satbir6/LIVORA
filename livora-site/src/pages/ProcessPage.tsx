@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { SiteLayout } from '../components/SiteLayout'
 import { galleryImages, processSteps } from '../data/siteContent'
 
 const phaseVisuals = [
@@ -20,7 +19,7 @@ const stageHighlights = [
 
 export function ProcessPage() {
   return (
-    <SiteLayout>
+    <>
       <section className="relative overflow-hidden px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
         <div className="absolute inset-0">
           <img src={galleryImages.process} alt="Livora process hero" className="h-full w-full object-cover" />
@@ -124,6 +123,6 @@ export function ProcessPage() {
           </div>
         </div>
       </section>
-    </SiteLayout>
+    </>
   )
 }

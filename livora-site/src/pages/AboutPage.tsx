@@ -1,4 +1,3 @@
-import { SiteLayout } from '../components/SiteLayout'
 import { Link } from 'react-router-dom'
 import { missionPillars, stats } from '../data/siteContent'
 
@@ -31,7 +30,7 @@ const distinctionPillars = [
 
 export function AboutPage() {
   return (
-    <SiteLayout>
+    <>
       <section className="relative overflow-hidden px-5 pb-14 pt-10 sm:px-8 sm:pt-14">
         <div className="absolute inset-0">
           <img
@@ -150,6 +149,6 @@ export function AboutPage() {
 
         </div>
       </section>
-    </SiteLayout>
+    </>
   )
 }
