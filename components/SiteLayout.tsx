@@ -19,7 +19,7 @@ const footerLinks = [
   { href: "/", label: "Home" },
   { href: "/the-brand", label: "The Brand" },
   { href: "/process", label: "Process" },
-  { href: "/contact", label: "Contact" },
+  { href: "/inquiry", label: "Inquiry" },
 ];
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -48,12 +48,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/book-consultation"
-              className="inline-flex items-center justify-center rounded-sm bg-[var(--primary)] px-8 py-4 font-montserrat text-[14px] font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[var(--muted-gold)]"
-            >
-              Book a Consultation
-            </Link>
           </div>
         </nav>
         {isMobileMenuOpen && (
