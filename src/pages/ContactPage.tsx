@@ -119,7 +119,7 @@ export function ContactPage() {
                 Baner, Pune, MH 411045
               </p>
               <p className="mt-4 text-sm leading-relaxed text-livora-grey">
-                M: 8669714195
+                M: 7887898925
                 <br />
                 E: concierge@livora.in
               </p>

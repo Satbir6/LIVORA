@@ -167,7 +167,7 @@ export function SiteLayout({ children }: Props) {
                 Baner, Pune, MH 411045
               </p>
               <p className="text-sm text-white">
-                +91 8669714195
+                +91 7887898925
                 <br />
                 concierge@livora.in
               </p>
