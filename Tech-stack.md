@@ -1,137 +1,185 @@
-# LIVORA Site - Tech Stack, Usage, Working, and Config
+# LIVORA: Tech Stack, File Structure, and Config Files
 
-## Project Type
+## 1) Tech Stack
 
-This project is a React + TypeScript single-page application built with Vite.
+### Core Framework
 
-### Core runtime
+- **Next.js 16.2.4** (App Router)
+- **React 19.2.4**
+- **React DOM 19.2.4**
 
-- React 18: UI rendering with component-based architecture.
-- React DOM 18: Browser rendering entry point.
-- TypeScript 5: Static typing for components, props, and data.
-- React Router DOM 6: Client-side routing for page navigation.
+### Language
 
-### Build, tooling, and quality
+- **TypeScript 5**
 
-- Vite 5: Dev server, fast HMR, production bundling.
-- @vitejs/plugin-react: React support in Vite.
-- ESLint 9 (flat config): Linting setup for JS/TS/React hooks.
-- typescript-eslint: TypeScript lint rules.
+### Styling and UI
 
-## How the Project Works (Runtime flow)
+- **Tailwind CSS 4**
+- **PostCSS** with `@tailwindcss/postcss`
+- **next/font/google** for typography:
+  - Inter
+  - Montserrat
+  - Playfair Display
+- **lucide-react** for icons
 
-1. Browser loads index.html (root mounting container).
-2. src/main.tsx creates the React root and wraps the app in:
-   - StrictMode
-   - BrowserRouter
-3. src/App.tsx defines route mapping:
-   - /
-   - /about
-   - /process
-   - /contact
-4. Shared chrome comes from src/components/SiteLayout.tsx:
-   - Sticky header
-   - Desktop/mobile navigation
-   - Footer
-   - Route transition animation wrapper
-5. Individual page components render section-based layouts using Tailwind classes.
-6. Content mostly comes from src/data/siteContent.ts (data-driven UI text, lists, and image references).
-7. Contact page uses React Hook Form + Zod safeParse validation before accepting submission.
+### Quality and Tooling
 
-## Configuration Explained
+- **ESLint 9**
+- **eslint-config-next 16.2.4** (`core-web-vitals` + `typescript` presets)
 
-### package.json
+### Package Manager / Runtime Scripts
 
-Scripts:
+- `npm run dev` - Start development server
+- `npm run build` - Build production bundle
+- `npm run start` - Start production server
+- `npm run lint` - Run lint checks
 
-- npm run dev: Starts Vite development server.
-- npm run build: Runs TypeScript project build check, then Vite production build.
-- npm run lint: Runs ESLint across the project.
-- npm run preview: Serves built dist output locally.
+---
 
-### vite.config.ts
+## 2) Project File Structure
 
-- Uses defineConfig with plugin list containing react().
-- No custom aliases or server options yet.
+```text
+LIVORA/
+|- app/
+|  |- book-consultation/
+|  |  |- page.tsx
+|  |- contact/
+|  |  |- page.tsx
+|  |- inquiry/
+|  |  |- page.tsx
+|  |- process/
+|  |  |- page.tsx
+|  |- projects/
+|  |  |- page.tsx
+|  |- the-brand/
+|  |  |- page.tsx
+|  |- favicon.ico
+|  |- globals.css
+|  |- layout.tsx
+|  |- page.tsx
+|- components/
+|  |- SiteLayout.tsx
+|- public/
+|  |- images/
+|  |  |- brand-hero.jpg
+|  |  |- inquiry-hero.jpg
+|  |  |- process-hero.jpg
+|  |- file.svg
+|  |- globe.svg
+|  |- next.svg
+|  |- vercel.svg
+|  |- window.svg
+|- images/
+|  |- Hero.jpg
+|  |- IMG_*.jpg (multiple project images)
+|- LOGO/
+|  |- Navbar-logo.png
+|  |- Logo-footer.png
+|  |- icon.svg
+|  |- icon.png
+|  |- Frame*.svg/.png
+|- AGENTS.md
+|- CONTEXT.md
+|- Design.tsx
+|- MVP.md
+|- README.md
+|- Tech-Stack.md
+|- eslint.config.mjs
+|- next-env.d.ts
+|- next.config.ts
+|- package-lock.json
+|- package.json
+|- postcss.config.mjs
+|- tsconfig.json
+```
 
-### tsconfig.json
+### Routing Pattern
 
-- Root references file.
-- Delegates to:
-  - tsconfig.app.json for browser app code
-  - tsconfig.node.json for Vite/node-side config typing
+- Uses the **App Router** (`app/` directory).
+- Every route segment has a `page.tsx` file.
+- Shared root layout is defined in `app/layout.tsx`.
+- Global styles are in `app/globals.css`.
 
-### tsconfig.app.json
+---
 
-- Target: ES2022
-- JSX runtime: react-jsx
-- Module resolution: bundler mode
-- noEmit true (Vite handles emit/bundling)
-- Includes only src
-- Includes strict cleanliness checks like noUnusedLocals and noUnusedParameters
+## 3) Config Files
 
-### tsconfig.node.json
+### `package.json`
 
-- Node-focused typing for tooling files (vite.config.ts).
-- Also uses bundler resolution + noEmit.
+Defines project metadata, scripts, dependencies, and devDependencies.
 
-### tailwind.config.js
+Key points:
 
-- Content scanning:
-  - index.html
-  - src/\*_/_.{js,ts,jsx,tsx}
-- Theme extension includes:
-  - livora color palette
-  - custom font families (heading/subheading/body)
-  - custom box shadows
-  - custom keyframes and animations (reveal, float)
+- Next.js + React + TypeScript stack
+- Tailwind 4 toolchain
+- Lint/build/dev/start scripts
 
-### postcss.config.js
+### `next.config.ts`
 
-- tailwindcss plugin enabled
-- autoprefixer plugin enabled
+Next.js configuration entry point.
 
-### eslint.config.js
+Current state:
 
-- ESLint flat config format
-- Ignores dist
-- Applies to ts/tsx files
-- Extends:
-  - @eslint/js recommended
-  - typescript-eslint recommended
-  - react-hooks recommended
-  - react-refresh vite rules
-- Browser globals included
+- Uses default exported `NextConfig`
+- No custom runtime/build behavior added yet
 
-### src/index.css
+### `tsconfig.json`
 
-- Imports Google fonts
-- Includes Tailwind layers: base, components, utilities
-- Defines reusable component utility classes:
-  - section-shell
-  - surface-card
-  - hero-panel
-  - ornament-dot
-  - reveal
+TypeScript compiler configuration.
 
-## Current Structure and Responsibilities
+Important settings:
 
-- src/main.tsx: Application bootstrap.
-- src/App.tsx: Route switch setup.
-- src/components/SiteLayout.tsx: Shared layout and navigation/footer shell.
-- src/pages/\*.tsx: Route-level page views.
-- src/components/ui/Button.tsx: Reusable button abstraction.
-- src/data/siteContent.ts: Centralized content and structured display data.
-- public/images: Static local assets.
-- LOGO: Logo assets used in header and footer.
+- `strict: true`
+- `moduleResolution: "bundler"`
+- `jsx: "react-jsx"`
+- `noEmit: true`
+- Path alias: `@/* -> ./*`
+- Excludes: `node_modules`, `Design.tsx`
 
-## Build and Output
+### `eslint.config.mjs`
 
-- Development: Vite dev server with hot module replacement.
-- Production build output: dist directory.
-- Preview mode: Serves dist for final local verification.
+ESLint flat config for Next.js + TypeScript.
 
-## Notes
+Important settings:
 
-- README.md is currently the default Vite template text and does not describe this LIVORA implementation yet.
-- src/App.css exists but is not imported by current source files.
+- Extends Next Core Web Vitals rules
+- Adds Next TypeScript rules
+- Global ignores include:
+  - `.next/**`
+  - `out/**`
+  - `build/**`
+  - `next-env.d.ts`
+  - `Design.tsx`
+
+### `postcss.config.mjs`
+
+PostCSS config using Tailwind 4 plugin.
+
+Important settings:
+
+- Plugin: `@tailwindcss/postcss`
+
+### `next-env.d.ts`
+
+Auto-generated Next.js type reference file.
+
+Important notes:
+
+- Includes Next and Next Image types
+- Should not be edited manually
+
+---
+
+## 4) Styling and Design System Notes
+
+From `app/globals.css` and `app/layout.tsx`:
+
+- CSS variables define brand palette and semantic colors.
+- Tailwind theme maps app colors and font tokens.
+- Uses a warm neutral background with layered radial gradients.
+- Typography is split by role:
+  - Playfair Display for major headings
+  - Montserrat for subheadings/navigation accents
+  - Inter for body text
+
+This gives the project a premium editorial interior-brand look while keeping utility-first styling through Tailwind.

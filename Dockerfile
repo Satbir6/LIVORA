@@ -1,18 +1,30 @@
-# Build stage
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS base
 
+FROM base AS deps
 WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
 
-COPY package*.json ./
-RUN npm install
-
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ENV NODE_ENV=production
 RUN npm run build
 
-# Serve stage
-FROM nginx:alpine
+FROM base AS runner
+WORKDIR /app
 
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
-EXPOSE 80
+COPY --from=builder /app/public ./public
+RUN mkdir .next
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
