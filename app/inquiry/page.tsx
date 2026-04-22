@@ -8,19 +8,19 @@ export default function InquiryPage() {
     <SiteLayout>
       <div className="animate-fade-in bg-[#F5F1EC]">
         <div className="flex min-h-screen flex-col lg:flex-row">
-          <div className="relative min-h-[50vh] w-full lg:min-h-screen lg:w-5/12">
+          <div className="relative w-full lg:w-5/12">
             <img
               src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1200"
               alt="Consultation"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#1F3F5B] via-[#1F3F5B]/80 to-transparent p-10 md:p-16">
+            <div className="relative flex min-h-[76svh] flex-col justify-end bg-gradient-to-t from-[#1F3F5B] via-[#1F3F5B]/80 to-transparent p-6 sm:p-8 md:min-h-[70vh] md:p-12 lg:min-h-screen lg:p-16">
               <div className="mb-6 h-[2px] w-12 bg-[#C8A97E]" />
-              <h1 className="mb-4 font-playfair text-4xl font-normal leading-[1.1] tracking-[-0.015em] text-[#F5F1EC] md:text-[64px]">Let&apos;s Design Your Home.</h1>
-              <p className="mb-8 max-w-sm font-inter text-lg font-light leading-relaxed text-[#E6D6C5]">
+              <h1 className="mb-4 font-playfair text-[2rem] font-normal leading-[1.1] tracking-[-0.015em] text-[#F5F1EC] md:text-[52px] lg:text-[64px]">Let&apos;s Design Your Home.</h1>
+              <p className="mb-8 max-w-sm font-inter text-base font-light leading-relaxed text-[#E6D6C5] md:text-lg">
                 Get expert guidance on layout, materials, budget, and timelines-before you commit to anything.
               </p>
-              <div className="space-y-4 border-t border-[#F5F1EC]/20 pt-6">
+              <div className="space-y-3 border-t border-[#F5F1EC]/20 pt-6 md:space-y-4">
                 <p className="flex items-start font-inter font-light text-[#F5F1EC]">
                   <MapPin size={18} className="mr-4 mt-1 shrink-0 text-[#C8A97E]" />
                   <span className="leading-relaxed">

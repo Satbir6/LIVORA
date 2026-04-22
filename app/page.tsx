@@ -62,13 +62,12 @@ export default function Home() {
         </section>
 
         <section className="relative z-20 border-b border-[#C8A97E]/30 bg-[#E6D6C5]">
-          <div className="mx-auto grid max-w-7xl grid-cols-2 divide-y divide-[#C8A97E]/30 md:grid-cols-5 md:divide-x md:divide-y-0">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 divide-y divide-[#C8A97E]/30 md:grid-cols-4 md:divide-x md:divide-y-0">
             {[
               { label: "450+ Homes Delivered", icon: HomeIcon },
               { label: "60-Day Handover", icon: Clock },
               { label: "10+2 Year Warranty", icon: ShieldCheck },
               { label: "100% Transparent Pricing", icon: FileText },
-              { label: "End-to-End Management", icon: CheckSquare },
             ].map((item) => (
               <div key={item.label} className="group flex cursor-default flex-col items-center justify-center px-4 py-10 transition-colors duration-500 hover:bg-[#F5F1EC]">
                 <item.icon className="mb-3 h-5 w-5 text-[#B9926B]" />
