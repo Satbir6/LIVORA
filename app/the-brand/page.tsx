@@ -34,7 +34,7 @@ export default function TheBrandPage() {
             <div className="space-y-24">
               <div className="group flex flex-col items-center gap-12 md:flex-row">
                 <div className="w-full overflow-hidden rounded-sm shadow-lg md:w-1/2">
-                  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000" alt="Observation First" className="h-[400px] w-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                  <img src="/images/Observation-First.jpg" alt="Observation First" className="h-[400px] w-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12">
                   <span className="mb-2 block font-playfair text-6xl italic text-[#E6D6C5] opacity-60 md:text-8xl">01</span>
@@ -56,7 +56,7 @@ export default function TheBrandPage() {
 
               <div className="group flex flex-col items-center gap-12 md:flex-row">
                 <div className="w-full overflow-hidden rounded-sm shadow-lg md:w-1/2">
-                  <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1000" alt="Precision Delivery" className="h-[400px] w-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                  <img src="/images/Precision-Delivery.jpg" alt="Precision Delivery" className="h-[400px] w-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12">
                   <span className="mb-2 block font-playfair text-6xl italic text-[#E6D6C5] opacity-60 md:text-8xl">03</span>
@@ -70,7 +70,7 @@ export default function TheBrandPage() {
 
         <section className="relative bg-[#1F3F5B] px-6 py-32 md:px-12">
           <div className="pointer-events-none absolute inset-0 opacity-10">
-            <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=2000" className="h-full w-full object-cover" alt="Background Texture" />
+            <img src="/images/Complete-Home-Interiors.png" className="h-full w-full object-cover" alt="Background Texture" />
           </div>
 
           <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-16 lg:flex-row">

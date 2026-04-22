@@ -24,7 +24,7 @@ From modular kitchens to complete home systems, Livora blends design, durability
 ## TRUST BAR
 
 - 450+ Homes Delivered
-- 45-Day Modular Execution
+- 60-Day Handover
 - 10+2 Year Warranty
 - 100% Transparent Pricing
 - End-to-End Project Management

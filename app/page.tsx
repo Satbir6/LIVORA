@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckSquare, Clock, FileText, Home as HomeIcon, Layers, ShieldCheck } from "lucide-react";
+import { CheckSquare, Clock, FileText, Home as HomeIcon, Layers, ShieldCheck } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
 export default function Home() {
@@ -65,7 +65,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl grid-cols-2 divide-y divide-[#C8A97E]/30 md:grid-cols-5 md:divide-x md:divide-y-0">
             {[
               { label: "450+ Homes Delivered", icon: HomeIcon },
-              { label: "45-Day Modular Execution", icon: Clock },
+              { label: "60-Day Handover", icon: Clock },
               { label: "10+2 Year Warranty", icon: ShieldCheck },
               { label: "100% Transparent Pricing", icon: FileText },
               { label: "End-to-End Management", icon: CheckSquare },
@@ -99,17 +99,17 @@ export default function Home() {
                 {
                   title: "Modular Kitchens",
                   desc: "Precision-engineered culinary spaces built for intense daily use and timeless appeal.",
-                  img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1400",
+                  img: "/images/Modular-Kitchens.jpg",
                 },
                 {
                   title: "Wardrobes & Storage",
                   desc: "Intelligent organization systems seamlessly integrated into your home's architecture.",
-                  img: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=800",
+                  img: "/images/Wardrobes-Storage.jpg",
                 },
                 {
                   title: "Complete Home Interiors",
                   desc: "End-to-end spatial design ensuring cohesive aesthetics across every single room.",
-                  img: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800",
+                  img: "/images/Complete-Home-Interiors.png",
                 },
               ].map((service) => (
                 <div key={service.title} className="group relative h-[450px] cursor-pointer overflow-hidden rounded-sm shadow-md lg:h-[600px]">
@@ -132,7 +132,7 @@ export default function Home() {
           <div className="mx-auto flex max-w-7xl flex-col items-center gap-20 lg:flex-row">
             <div className="relative w-full lg:w-1/2">
               <img
-                src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1200"
+                src="/images/image-Home-Page.png"
                 alt="Precision Design"
                 className="h-[650px] w-full rounded-sm object-cover shadow-2xl"
               />
@@ -186,7 +186,7 @@ export default function Home() {
 
         <section className="relative overflow-hidden bg-[#1F3F5B] px-6 py-32 text-[#F5F1EC] md:px-12">
           <div className="pointer-events-none absolute inset-0 opacity-10">
-            <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=2000" className="h-full w-full object-cover" alt="Background Texture" />
+            <img src="/images/Complete-Home-Interiors.png" className="h-full w-full object-cover" alt="Background Texture" />
           </div>
 
           <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-16 lg:flex-row">
@@ -199,7 +199,7 @@ export default function Home() {
 
               <div className="relative h-72 w-full overflow-hidden rounded-sm border-l-4 border-[#B9926B] shadow-2xl md:h-96">
                 <img
-                  src="https://picsum.photos/id/1043/1000/700"
+                  src="/images/image-Home-Page-1.jpg"
                   alt="System Driven Design"
                   className="h-full w-full object-cover"
                 />

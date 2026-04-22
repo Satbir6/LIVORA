@@ -13,19 +13,19 @@ export default function ProcessPage() {
       phase: "02",
       title: "Architectural Design Planning",
       desc: "Our design team translates your vision into precise layouts and material palettes. We provide high-fidelity 3D visualizations so you can walk through your future space before a single board is cut.",
-      img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000",
+      img: "/images/Observation-First.jpg",
     },
     {
       phase: "03",
       title: "Material Customisation",
       desc: "We guide you through selecting premium finishes, hardware, and module configurations. This phase ensures every detail is perfectly aligned with both your taste and your established budget.",
-      img: "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&q=80&w=1000",
+      img: "/images/Material-Customisation.jpg",
     },
     {
       phase: "04",
       title: "Precision Execution",
       desc: "Design meets manufacturing. Our advanced CNC factory takes over to produce your interiors with millimeter precision. Simultaneously, our site team prepares your home for a seamless, rapid installation.",
-      img: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=1000",
+      img: "/images/Complete-Home-Interiors.png",
     },
     {
       phase: "05",
