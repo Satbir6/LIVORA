@@ -1,9 +1,71 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
+const SERVICE_OPTIONS = [
+  "Full Home Interiors",
+  "Modular Interiors",
+  "Custom Interiors",
+  "Renovation",
+] as const;
+
+type InquiryForm = {
+  firstName: string;
+  email: string;
+  mobileNumber: string;
+  service: string;
+  message: string;
+};
+
 export default function InquiryPage() {
+  const [form, setForm] = useState<InquiryForm>({
+    firstName: "",
+    email: "",
+    mobileNumber: "",
+    service: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFeedback(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const result = (await response.json()) as { success: boolean; message?: string };
+
+      if (!response.ok || !result.success) {
+        setFeedback({ type: "error", text: result.message ?? "Failed to submit inquiry." });
+        return;
+      }
+
+      setFeedback({ type: "success", text: "Your inquiry has been submitted successfully." });
+      setForm({
+        firstName: "",
+        email: "",
+        mobileNumber: "",
+        service: "",
+        message: "",
+      });
+    } catch {
+      setFeedback({ type: "error", text: "Something went wrong while submitting your inquiry." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <SiteLayout>
       <div className="animate-fade-in bg-[#F5F1EC]">
@@ -40,7 +102,7 @@ export default function InquiryPage() {
               <h3 className="mb-2 font-montserrat text-sm font-medium uppercase tracking-[0.12em] text-[#B9926B]">Project Inquiry</h3>
               <h2 className="mb-8 border-b border-[#E6D6C5] pb-6 font-playfair text-3xl font-normal tracking-[-0.015em] text-[#1F3F5B] md:text-[44px]">Tell us about your space</h2>
 
-              <form className="space-y-7" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-7" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 gap-7 md:grid-cols-2">
                   <div>
                     <label htmlFor="firstName" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">First Name</label>
@@ -48,17 +110,23 @@ export default function InquiryPage() {
                       id="firstName"
                       name="firstName"
                       type="text"
+                      value={form.firstName}
+                      onChange={(e) => setForm((prev) => ({ ...prev, firstName: e.target.value }))}
+                      required
                       className="w-full border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none"
                       placeholder="Enter your first name"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="emailAddress" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Email Address</label>
+                    <label htmlFor="email" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Email Address</label>
                     <input
-                      id="emailAddress"
-                      name="emailAddress"
+                      id="email"
+                      name="email"
                       type="email"
+                      value={form.email}
+                      onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
+                      required
                       className="w-full border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none"
                       placeholder="Enter your email address"
                     />
@@ -70,24 +138,29 @@ export default function InquiryPage() {
                       id="mobileNumber"
                       name="mobileNumber"
                       type="tel"
+                      value={form.mobileNumber}
+                      onChange={(e) => setForm((prev) => ({ ...prev, mobileNumber: e.target.value }))}
                       className="w-full border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none"
                       placeholder="Enter your mobile number"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="serviceType" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Choose Service</label>
+                    <label htmlFor="service" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Choose Service</label>
                     <select
-                      id="serviceType"
-                      name="serviceType"
-                      defaultValue=""
+                      id="service"
+                      name="service"
+                      value={form.service}
+                      onChange={(e) => setForm((prev) => ({ ...prev, service: e.target.value }))}
+                      required
                       className="w-full border-b border-[#E6D6C5] bg-transparent py-2 font-inter text-[#2B2B2B] focus:border-[#B9926B] focus:outline-none"
                     >
                       <option value="" disabled>Select a service</option>
-                      <option value="full-home-interiors">Full Home Interiors</option>
-                      <option value="modular-interiors">Modular Interiors</option>
-                      <option value="custom-interiors">Custom Interiors</option>
-                      <option value="renovation">Renovation</option>
+                      {SERVICE_OPTIONS.map((service) => (
+                        <option key={service} value={service}>
+                          {service}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -98,16 +171,29 @@ export default function InquiryPage() {
                     id="message"
                     name="message"
                     rows={4}
+                    value={form.message}
+                    onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
                     className="w-full resize-none border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none"
                     placeholder="Tell us about your space and requirements..."
                   />
                 </div>
 
+                {feedback ? (
+                  <p
+                    className={`text-sm ${feedback.type === "success" ? "text-green-700" : "text-red-700"}`}
+                    role="status"
+                    aria-live="polite"
+                  >
+                    {feedback.text}
+                  </p>
+                ) : null}
+
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="mt-4 inline-flex w-full items-center justify-center rounded-sm bg-[#B9926B] px-8 py-4 font-montserrat text-[13px] font-medium uppercase tracking-[0.12em] text-white transition-all duration-300 hover:bg-[#1F3F5B]"
                 >
-                  Schedule My Consultation
+                  {isSubmitting ? "Submitting..." : "Schedule My Consultation"}
                 </button>
               </form>
             </div>
