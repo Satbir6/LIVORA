@@ -11,10 +11,10 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
 ENV NODE_ENV=production
 
-RUN npm run build
+RUN echo "DATABASE_URL is set: ${DATABASE_URL:+yes}" && npm run build
 
 FROM base AS runner
 WORKDIR /app
