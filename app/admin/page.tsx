@@ -232,58 +232,6 @@ function InquiryTable({
   );
 }
 
-function InquiryCard({
-  row,
-  table,
-  onDelete,
-}: {
-  row: InquiryRecord;
-  table: InquiryTableName;
-  onDelete: (table: InquiryTableName, id: string) => void;
-}) {
-  return (
-    <article className="rounded-sm border border-[#E6D6C5] bg-white p-5 shadow-sm">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="font-montserrat text-[11px] font-semibold uppercase tracking-[0.12em] text-[#B9926B]">{table === "project_inquiries_dev" ? "Development" : "Production"}</p>
-          <h4 className="mt-2 font-playfair text-2xl text-[#1F3F5B]">{row.first_name}</h4>
-        </div>
-        <button
-          type="button"
-          onClick={() => onDelete(table, row.id)}
-          className="inline-flex items-center gap-2 rounded-sm border border-[#E6D6C5] px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#8A1F1F] transition-colors hover:border-[#8A1F1F] hover:bg-[#FDF2F2]"
-        >
-          <Trash2 size={14} />
-          Delete
-        </button>
-      </div>
-
-      <dl className="mt-5 grid gap-4 text-sm text-[#2B2B2B] sm:grid-cols-2">
-        <div>
-          <dt className="font-montserrat text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8A8A8A]">Email</dt>
-          <dd className="mt-1 break-all">{row.email}</dd>
-        </div>
-        <div>
-          <dt className="font-montserrat text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8A8A8A]">Mobile</dt>
-          <dd className="mt-1">{row.mobile_number ?? "-"}</dd>
-        </div>
-        <div>
-          <dt className="font-montserrat text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8A8A8A]">Service</dt>
-          <dd className="mt-1">{row.service}</dd>
-        </div>
-        <div>
-          <dt className="font-montserrat text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8A8A8A]">Created</dt>
-          <dd className="mt-1">{new Date(row.created_at).toLocaleString()}</dd>
-        </div>
-      </dl>
-
-      <div className="mt-5 rounded-sm bg-[#F5F1EC] p-4 text-sm leading-6 text-[#2B2B2B]">
-        {row.message ?? "No message provided."}
-      </div>
-    </article>
-  );
-}
-
 function UserForm({
   title,
   description,
@@ -757,29 +705,21 @@ export default function AdminPage() {
 
                   <div className="mt-6">
                     {activeInquiryTab === "development" ? (
-                      <div className="space-y-4">
-                        {devDevelopmentInquiries.length ? (
-                          devDevelopmentInquiries.map((row) => (
-                            <InquiryCard key={row.id} row={row} table="project_inquiries_dev" onDelete={handleDeleteInquiry} />
-                          ))
-                        ) : (
-                          <div className="rounded-2xl border border-dashed border-[#D4C1A7] bg-[#F5F1EC] px-5 py-12 text-center text-sm text-[#8A8A8A]">
-                            No development inquiries submitted yet.
-                          </div>
-                        )}
-                      </div>
+                      <InquiryTable
+                        title="Development Inquiries"
+                        rows={devDevelopmentInquiries}
+                        table="project_inquiries_dev"
+                        onDelete={handleDeleteInquiry}
+                        deletingId={deletingId}
+                      />
                     ) : (
-                      <div className="space-y-4">
-                        {devProductionInquiries.length ? (
-                          devProductionInquiries.map((row) => (
-                            <InquiryCard key={row.id} row={row} table="project_inquiries_production" onDelete={handleDeleteInquiry} />
-                          ))
-                        ) : (
-                          <div className="rounded-2xl border border-dashed border-[#D4C1A7] bg-[#F5F1EC] px-5 py-12 text-center text-sm text-[#8A8A8A]">
-                            No production inquiries submitted yet.
-                          </div>
-                        )}
-                      </div>
+                      <InquiryTable
+                        title="Production Inquiries"
+                        rows={devProductionInquiries}
+                        table="project_inquiries_production"
+                        onDelete={handleDeleteInquiry}
+                        deletingId={deletingId}
+                      />
                     )}
                   </div>
                 </div>
