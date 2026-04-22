@@ -40,10 +40,67 @@ export default function InquiryPage() {
               <h3 className="mb-2 font-montserrat text-sm font-medium uppercase tracking-[0.12em] text-[#B9926B]">Project Inquiry</h3>
               <h2 className="mb-8 border-b border-[#E6D6C5] pb-6 font-playfair text-3xl font-normal tracking-[-0.015em] text-[#1F3F5B] md:text-[44px]">Tell us about your space</h2>
 
-              <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-7" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid grid-cols-1 gap-7 md:grid-cols-2">
+                  <div>
+                    <label htmlFor="firstName" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">First Name</label>
+                    <input
+                      id="firstName"
+                      name="firstName"
+                      type="text"
+                      className="w-full border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none"
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="emailAddress" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Email Address</label>
+                    <input
+                      id="emailAddress"
+                      name="emailAddress"
+                      type="email"
+                      className="w-full border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none"
+                      placeholder="Enter your email address"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="mobileNumber" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Mobile Number</label>
+                    <input
+                      id="mobileNumber"
+                      name="mobileNumber"
+                      type="tel"
+                      className="w-full border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none"
+                      placeholder="Enter your mobile number"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="serviceType" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Choose Service</label>
+                    <select
+                      id="serviceType"
+                      name="serviceType"
+                      defaultValue=""
+                      className="w-full border-b border-[#E6D6C5] bg-transparent py-2 font-inter text-[#2B2B2B] focus:border-[#B9926B] focus:outline-none"
+                    >
+                      <option value="" disabled>Select a service</option>
+                      <option value="full-home-interiors">Full Home Interiors</option>
+                      <option value="modular-interiors">Modular Interiors</option>
+                      <option value="custom-interiors">Custom Interiors</option>
+                      <option value="renovation">Renovation</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div>
-                  <label className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Project Requirements</label>
-                  <textarea rows={3} className="w-full resize-none border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none" placeholder="Briefly describe what you are looking for..." />
+                  <label htmlFor="message" className="mb-3 block font-montserrat text-xs font-medium uppercase tracking-wide-premium text-[#8A8A8A]">Write Your Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    className="w-full resize-none border-b border-[#E6D6C5] bg-transparent py-2 font-inter focus:border-[#B9926B] focus:outline-none"
+                    placeholder="Tell us about your space and requirements..."
+                  />
                 </div>
 
                 <button
