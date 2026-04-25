@@ -4,9 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Mail, MapPin, Menu, Phone, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import navbarLogo from "@/LOGO/Navbar-logo.png";
 import footerLogo from "@/LOGO/Logo-footer.png";
+
+const CONSULTATION_POPUP_KEY = "livora-consultation-popup-seen";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -25,6 +27,30 @@ const footerLinks = [
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isConsultationPopupOpen, setIsConsultationPopupOpen] = useState(false);
+
+  useEffect(() => {
+    if (pathname === "/inquiry") {
+      return;
+    }
+
+    const hasSeenPopup = sessionStorage.getItem(CONSULTATION_POPUP_KEY) === "true";
+    if (hasSeenPopup) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setIsConsultationPopupOpen(true);
+      sessionStorage.setItem(CONSULTATION_POPUP_KEY, "true");
+    }, 10000);
+
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
+
+  const closeConsultationPopup = () => {
+    setIsConsultationPopupOpen(false);
+    sessionStorage.setItem(CONSULTATION_POPUP_KEY, "true");
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--background)] font-inter text-[var(--foreground)]">
@@ -65,19 +91,47 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/book-consultation"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="inline-flex w-full items-center justify-center rounded-sm bg-[var(--primary)] px-8 py-4 font-montserrat text-[14px] font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[var(--muted-gold)]"
-              >
-                Book a Consultation
-              </Link>
             </div>
           </div>
         )}
       </header>
 
       <main className="flex-grow">{children}</main>
+
+      {isConsultationPopupOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-[rgba(12,23,35,0.58)] px-6">
+          <div className="relative w-full max-w-md rounded-md border border-[var(--soft-beige)] bg-[var(--background)] p-8 shadow-2xl">
+            <button
+              type="button"
+              aria-label="Close consultation popup"
+              onClick={closeConsultationPopup}
+              className="absolute right-3 top-3 text-[var(--secondary)] transition-colors hover:text-[var(--primary)]"
+            >
+              <X size={22} />
+            </button>
+            <h3 className="font-montserrat text-xl font-semibold uppercase tracking-[0.08em] text-[var(--secondary)]">Book Free Consultation</h3>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--warm-grey)]">
+              Begin your interior transformation with a complimentary consultation crafted around your space, style, and budget.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/inquiry"
+                onClick={closeConsultationPopup}
+                className="inline-flex w-full items-center justify-center rounded-sm bg-[var(--primary)] px-6 py-3 font-montserrat text-xs font-semibold uppercase tracking-[0.11em] text-white transition-all duration-300 hover:bg-[var(--muted-gold)]"
+              >
+                Book Free Consultation
+              </Link>
+              <button
+                type="button"
+                onClick={closeConsultationPopup}
+                className="inline-flex w-full items-center justify-center rounded-sm border border-[var(--soft-beige)] px-6 py-3 font-montserrat text-xs font-semibold uppercase tracking-[0.11em] text-[var(--secondary)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]"
+              >
+                Maybe Later
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="border-t-8 border-[var(--primary)] bg-[var(--secondary)] px-6 pb-10 pt-20 text-[var(--neutralLight)] md:px-12">
         <div className="mx-auto mb-16 grid w-full max-w-7xl gap-12 md:grid-cols-4">
