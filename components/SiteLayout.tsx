@@ -4,9 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Mail, MapPin, Menu, Phone, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import navbarLogo from "@/LOGO/Navbar-logo.png";
 import footerLogo from "@/LOGO/Logo-footer.png";
+
+const CONSULTATION_POPUP_KEY = "livora-consultation-popup-seen";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -25,6 +27,30 @@ const footerLinks = [
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isConsultationPopupOpen, setIsConsultationPopupOpen] = useState(false);
+
+  useEffect(() => {
+    if (pathname === "/inquiry") {
+      return;
+    }
+
+    const hasSeenPopup = sessionStorage.getItem(CONSULTATION_POPUP_KEY) === "true";
+    if (hasSeenPopup) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setIsConsultationPopupOpen(true);
+      sessionStorage.setItem(CONSULTATION_POPUP_KEY, "true");
+    }, 10000);
+
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
+
+  const closeConsultationPopup = () => {
+    setIsConsultationPopupOpen(false);
+    sessionStorage.setItem(CONSULTATION_POPUP_KEY, "true");
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background font-inter text-foreground">
