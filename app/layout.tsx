@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import TrafficLogger from "@/components/TrafficLogger";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -30,7 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${montserrat.variable} ${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <TrafficLogger />
+        {children}
+      </body>
     </html>
   );
 }

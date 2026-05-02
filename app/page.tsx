@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CheckSquare, Clock, FileText, Home as HomeIcon, Layers, ShieldCheck } from "lucide-react";
+import { Clock, FileText, Home as HomeIcon, Layers, ShieldCheck } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
 export default function Home() {
